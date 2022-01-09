@@ -41,13 +41,13 @@ namespace Lab4_1
 
         public void DrawCircle(int x, int y, int R)
         {
-            g.FillEllipse(Brushes.White, (x - R), (y - R), 2 * R, 2 * R);
+            //g.FillEllipse(Brushes.White, (x - R), (y - R), 2 * R, 2 * R);
             g.DrawEllipse(blackPen, (x - R), (y - R), 2 * R, 2 * R);
         }
 
         public void DrawSelectedCircle(int x, int y, int R)
         {
-            g.FillEllipse(Brushes.White, (x - R), (y - R), 2 * R, 2 * R);
+            //g.FillEllipse(Brushes.White, (x - R), (y - R), 2 * R, 2 * R);
             g.DrawEllipse(greenPen, (x - R), (y - R), 2 * R, 2 * R);
         }
 
@@ -99,12 +99,28 @@ namespace Lab4_1
             selected = false;
         }
         
+        public bool Selected()
+        {
+            if (selected)
+                return true;
+            else
+                return false;
+        }
+
         public void DrawCircle()
         {
-            if (selected == true)
+            if (Selected())
                 draw.DrawSelectedCircle(x, y, R);
             else
                 draw.DrawCircle(x, y, R);
+        }
+
+        public bool WasClicked(int coordX, int coordY)
+        {
+            if (Math.Pow(x - coordX, 2) + Math.Pow(y - coordY, 2) <= R * R)
+                return true;
+            else
+                return false;
         }
     }
 }
